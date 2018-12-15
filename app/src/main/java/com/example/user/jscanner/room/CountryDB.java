@@ -1,19 +1,21 @@
 package com.example.user.jscanner.room;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+import io.reactivex.annotations.NonNull;
 
 @Entity(tableName = "countryDB")
 public class CountryDB {
 
-    public CountryDB(@NonNull String startwith, String country, String countrycode) {
+    public CountryDB(@android.support.annotation.NonNull String startwith, String country, String countrycode) {
         this.startwith = startwith;
         this.country = country;
         this.countrycode = countrycode;
     }
 
+    @android.support.annotation.NonNull
     @PrimaryKey
     @ColumnInfo(name = "startwith")
     private String startwith;

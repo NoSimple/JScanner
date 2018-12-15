@@ -1,14 +1,15 @@
 package com.example.user.jscanner.room;
 
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.example.user.jscanner.model.Country;
 
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
-@Database(entities = {Country.class}, version = 1)
+
+@Database(entities = {CountryDB.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase singleton;
 
