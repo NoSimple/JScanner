@@ -56,19 +56,23 @@ public class DetailPresenter implements IBasePresenter {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        activity.setFlagText(country.getCountry());
-                        Resources resources = activity.getResources();
-                        final int resourceId = resources.getIdentifier(country.getCountrycode()+".png", "drawable",
-                                activity.getPackageName());
-                        if (resourceId != 0) {
-                            activity.setFlagImage(resources.getDrawable(resourceId, activity.getTheme()));
-                        } else {
-                            Glide.with(activity)
-                                    .load("https://www.countryflags.io/" + country.getCountrycode() + "/flat/64.png")
-                                    .into(activity.getFlagImageView());
+                        if (country != null) {
+                            activity.setFlagText(country.getCountry());
+                            Resources resources = activity.getResources();
+                            final int resourceId = resources.getIdentifier(country.getCountrycode() + ".png", "drawable",
+                                    activity.getPackageName());
+                            if (resourceId != 0) {
+                                activity.setFlagImage(resources.getDrawable(resourceId, activity.getTheme()));
+                            } else {
+                                Glide.with(activity)
+                                        .load("https://www.countryflags.io/" + country.getCountrycode() + "/flat/64.png")
+                                        .into(activity.getFlagImageView());
+                            }
+                            activity.setBarcodeImage(finalBitmap);
+                            activity.setBarcodeCode(code);
+                        } else{
+                            activity.setFlagText("Not found!");
                         }
-                        activity.setBarcodeImage(finalBitmap);
-                        activity.setBarcodeCode(code);
                         activity.hidePB();
                     }
                 });
