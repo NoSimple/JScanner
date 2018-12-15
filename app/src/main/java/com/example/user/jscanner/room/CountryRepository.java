@@ -15,7 +15,7 @@ public class CountryRepository {
         this.mContext = mContext;
     }
 
-    public Single<List<CountryItem>> getItem() {
+    public Single<List<CountryItem>> getItems() {
         return Single.fromCallable(new Callable<List<CountryItem>>() {
             @Override
             public List<CountryItem> call() throws Exception {
@@ -26,5 +26,14 @@ public class CountryRepository {
         });
     }
 
+    public Single<CountryItem> getItemByID(final String id) {
+        return Single.fromCallable(new Callable<CountryItem>() {
+            @Override
+            public CountryItem call() throws Exception {
+                AppDatabase db = AppDatabase.getAppDatabase(mContext);
 
+                return db.countryDAO().findByStartwith(id);
+            }
+        });
+    }
 }
