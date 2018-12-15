@@ -15,4 +15,16 @@ public class CountryRepository {
         this.mContext = mContext;
     }
 
+    public Single<List<CountryItem>> getItem() {
+        return Single.fromCallable(new Callable<List<CountryItem>>() {
+            @Override
+            public List<CountryItem> call() throws Exception {
+                AppDatabase db = AppDatabase.getAppDatabase(mContext);
+
+                return db.countryDAO().getSingle();
+            }
+        });
+    }
+
+
 }
