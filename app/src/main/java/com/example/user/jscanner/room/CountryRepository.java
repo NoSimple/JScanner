@@ -15,6 +15,4 @@ public class CountryRepository {
         this.mContext = mContext;
     }
 
-
-
 }
