@@ -1,18 +1,20 @@
 package com.example.user.jscanner.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.annotations.Nullable;
+
+
+@Entity
 public class Country {
 
-    @SerializedName("startWtih")
-    @Expose
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String startWtih;
-    @SerializedName("country")
-    @Expose
     private String country;
-    @SerializedName("countryCode")
-    @Expose
     private String countryCode;
 
     public String getStartWtih() {
@@ -37,6 +39,14 @@ public class Country {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

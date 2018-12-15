@@ -1,14 +1,15 @@
 package com.example.user.jscanner.room;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "countryDB")
-public class CountryDB {
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-    public CountryDB(@NonNull String startwith, String country, String countrycode) {
+@Entity(tableName = "country")
+public class CountryItem {
+
+    public CountryItem(@NonNull String startwith, String country, String countrycode) {
         this.startwith = startwith;
         this.country = country;
         this.countrycode = countrycode;
