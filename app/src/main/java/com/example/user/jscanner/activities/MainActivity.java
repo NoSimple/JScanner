@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         String manualBarcode = manualET.getText().toString();
         if (manualBarcode.isEmpty()){
-            //TODO открыть камеру
+            Intent intent = new Intent(this, ScannerActivity.class);
+            startActivity(intent);
         } else {
             Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("CODE", manualBarcode);
