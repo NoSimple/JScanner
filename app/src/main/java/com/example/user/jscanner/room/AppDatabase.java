@@ -9,7 +9,7 @@ import com.example.user.jscanner.model.Country;
 
 
 
-@Database(entities = {Country.class}, version = 1)
+@Database(entities = {CountryItem.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase singleton;
 

@@ -15,6 +15,8 @@ public class CountryItem {
         this.countrycode = countrycode;
     }
 
+
+    @NonNull
     @PrimaryKey
     @ColumnInfo(name = "startwith")
     private String startwith;
@@ -34,6 +36,10 @@ public class CountryItem {
     public String getCountrycode() {
         return countrycode;
     }
+
+    public String setStartwith() {return startwith;}
+    public String setCountry() {return country;}
+    public String setCountryCode() {return countrycode;}
 
 
 }
