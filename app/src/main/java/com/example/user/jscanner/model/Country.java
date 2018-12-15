@@ -4,12 +4,9 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 
-@Entity
+
 public class Country {
 
-
-    @PrimaryKey(autoGenerate = true)
-    private int id;
     private String startWtih;
     private String country;
     private String countryCode;
@@ -46,12 +43,6 @@ public class Country {
         this.countryCode = countryCode;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 }
 
