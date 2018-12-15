@@ -10,13 +10,13 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {Country.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-    private AppDatabase singleton;
+    private static AppDatabase singleton;
 
-    private static final String DATABASE_NAME = "NewsItemsDatabase.db";
+    private static final String DATABASE_NAME = "CountryDatabase.db";
 
-    public abstract CountryDAO newsItemDAO();
+    public abstract CountryDAO countryDAO();
 
-    public AppDatabase getAppDatabase(Context context) {
+    public static AppDatabase getAppDatabase(Context context) {
         if (singleton == null) {
             synchronized (AppDatabase.class) {
                 if (singleton == null) {
