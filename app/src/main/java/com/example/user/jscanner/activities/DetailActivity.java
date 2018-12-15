@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.user.jscanner.R;
-import com.example.user.jscanner.presenters.BasePresenter;
+import com.example.user.jscanner.presenters.DetailPresenter;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -15,7 +15,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Testlog" ;
 
     private ProgressBar progressBar;
-    private BasePresenter presenter;
+    private DetailPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class DetailActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.det_pb);
 
-        presenter = new BasePresenter();
+        presenter = new DetailPresenter();
         presenter.onAttach(this);
 
         /*
