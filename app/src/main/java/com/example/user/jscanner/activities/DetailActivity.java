@@ -10,7 +10,6 @@ import com.example.user.jscanner.model.Country;
 import com.example.user.jscanner.network.RestApi;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -25,6 +24,8 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        
 
         Disposable disposable = RestApi.getInstance().countriesEndpoint().countryObject(SOURCE_URL).
                 subscribeOn(Schedulers.io())
