@@ -1,10 +1,12 @@
-package com.example.user.jscanner;
+package com.example.user.jscanner.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.user.jscanner.R;
 
 public class MainActivity extends AppCompatActivity {
 

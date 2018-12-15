@@ -1,4 +1,4 @@
-package com.example.user.jscanner.detail;
+package com.example.user.jscanner.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
