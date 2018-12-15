@@ -1,10 +1,5 @@
 package com.example.user.jscanner.model;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 
 public class Country {
 

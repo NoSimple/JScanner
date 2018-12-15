@@ -1,12 +1,11 @@
 package com.example.user.jscanner.room;
 
-
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "country")
+@Entity(tableName = "countries")
 public class CountryItem {
 
     public CountryItem(@NonNull String startwith, String country, String countrycode) {
@@ -15,9 +14,8 @@ public class CountryItem {
         this.countrycode = countrycode;
     }
 
-
-    @NonNull
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "startwith")
     private String startwith;
     @ColumnInfo(name = "country")
@@ -37,10 +35,16 @@ public class CountryItem {
         return countrycode;
     }
 
-    public String setStartwith() {return startwith;}
-    public String setCountry() {return country;}
-    public String setCountryCode() {return countrycode;}
+    public void setStartwith(String startwith) {
+        this.startwith = startwith;
+    }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode;
+    }
 }
 
