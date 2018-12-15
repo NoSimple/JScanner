@@ -9,11 +9,11 @@ import com.example.user.jscanner.model.Country;
 
 
 
-@Database(entities = {CountryDB.class}, version = 1)
+@Database(entities = {Country.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase singleton;
 
-    private static final String DATABASE_NAME = "CountryDatabase.db";
+    private static final String DATABASE_NAME = "countries.db";
 
     public abstract CountryDAO countryDAO();
 
