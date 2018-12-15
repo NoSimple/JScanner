@@ -20,6 +20,7 @@
         android:textSize="40sp"/>
     <EditText
         android:id="@+id/manual_barcode"
+        android:text="7622210309358"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/main_edittext_hint"

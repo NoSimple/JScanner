@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.user.jscanner.R;
 import com.example.user.jscanner.model.Country;
+import com.example.user.jscanner.model.CountryMapper;
 import com.example.user.jscanner.network.RestApi;
 import com.example.user.jscanner.room.AppDatabase;
 import com.example.user.jscanner.room.CountryItem;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String SOURCE_URL = "http://daracul.000webhostapp.com/countries.csv";
     private static final String LOG_TAG = "Testlog" ;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private CountryRepository db;
 
     Button scanBtn;
     EditText manualET;
@@ -46,24 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, "isFirst? "+isFirstTime());
         if (isFirstTime()){
+            db = new CountryRepository(this);
             loadDataFromNetwork();
             //TODO load data to DB
             saveBooleanToSharedPref(false);
-        } {
-            new CountryRepository(MainActivity.this).getItems()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<List<CountryItem>>() {
-                        @Override
-                        public void accept(List<CountryItem> countryItems) throws Exception {
-                            Log.d(LOG_TAG,"from db "+countryItems.get(0).getCountry());
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            Log.d(LOG_TAG,"ERRROR");
-                        }
-                    });
         }
 
         scanBtn = findViewById(R.id.scan_btn);
@@ -103,26 +93,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .map(new Function<List<Country>, List<CountryItem>>() {
                     @Override
                     public List<CountryItem> apply(List<Country> countries) {
-                        List<CountryItem> countryItemList = new ArrayList<>();
-                        for (Country country:countries){
-                            countryItemList.add(new CountryItem(
-                                    country.getStartWtih(),
-                                    country.getCountry(),
-                                    country.getCountryCode()));
-                        }
-                        return countryItemList;
+                        return CountryMapper.convertToDbItem(countries);
                     }
                 }).flatMap(new Function<List<CountryItem>, SingleSource<? extends List<CountryItem>>>() {
                     @Override
                     public SingleSource<? extends List<CountryItem>> apply(List<CountryItem> countryItems) {
-                        return new CountryRepository(MainActivity.this).saveNews(countryItems);
+                        return db.saveNews(countryItems);
 
                     }
                 }).subscribe(new Consumer<List<CountryItem>>() {
                     @Override
                     public void accept(List<CountryItem> countryItems) throws Exception {
-                        Log.d(LOG_TAG,"Accepted");
-
+                        showToast("Base update");
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -133,9 +115,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         compositeDisposable.add(disposable);
     }
 
+    private void showToast(String text) {
+        Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     protected void onStop() {
         super.onStop();
+        if (db!=null){
+            db = null;
+        }
         compositeDisposable.clear();
     }
 }
