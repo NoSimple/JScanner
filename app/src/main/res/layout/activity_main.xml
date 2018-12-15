@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/mainPic"
+        android:src="@drawable/main_pic"
         android:layout_weight="2"/>
     <TextView
         android:layout_width="match_parent"
