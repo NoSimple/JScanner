@@ -10,7 +10,9 @@ import java.util.List;
 @Dao
 public interface CountryDAO {
 
-    @Query("SELECT * FROM country")
+    @Query("SELECT * FROM countries")
     List<CountryItem> getSingle();
+
+
 
 }
