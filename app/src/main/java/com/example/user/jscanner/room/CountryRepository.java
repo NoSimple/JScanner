@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public class CountryRepository {
@@ -36,4 +37,34 @@ public class CountryRepository {
             }
         });
     }
+
+    public Single saveNews(final List<CountryItem> countryItems){
+        return Single.fromCallable(new Callable<List<CountryItem>>() {
+            @Override
+            public List<CountryItem> call() throws Exception {
+                AppDatabase db = AppDatabase.getAppDatabase(mContext);
+                db.countryDAO().deleteAll();
+
+                CountryItem[] countryList = countryItems.toArray(new CountryItem[countryItems.size()]);
+
+                db.countryDAO().insertAll(countryList);
+                return countryItems;
+            }
+        });
+    }
+
+//    public Completable saveNews(final List<CountryItem> countryItems){
+//        return Completable.fromCallable(new Callable<Void>() {
+//            @Override
+//            public Void call() throws Exception {
+//                AppDatabase db = AppDatabase.getAppDatabase(mContext);
+//                db.countryDAO().deleteAll();
+//
+//                CountryItem[] countryList = countryItems.toArray(new CountryItem[countryItems.size()]);
+//
+//                db.countryDAO().insertAll(countryList);
+//                return null;
+//            }
+//        });
+//    }
 }
