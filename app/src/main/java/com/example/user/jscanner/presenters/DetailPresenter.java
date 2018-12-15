@@ -1,23 +1,27 @@
 package com.example.user.jscanner.presenters;
 
+import android.support.v7.app.AppCompatActivity;
+
 import com.example.user.jscanner.activities.DetailActivity;
 
 import java.util.logging.Handler;
 
-public class BasePresenter {
+public class DetailPresenter implements IBasePresenter {
 
     private DetailActivity activity;
     private Handler handler;
 
-    public void onAttach(DetailActivity activity) {
-        this.activity = activity;
+    @Override
+    public void onAttach(AppCompatActivity activity) {
+        this.activity = (DetailActivity) activity;
     }
 
-    public void onDetach(){
-        this.activity = null;
+    @Override
+    public void onDetach() {
+        activity = null;
     }
 
-    public void process(String code){
+    public void process(String code) {
         activity.showPB();
         new Thread(new Runnable() {
             @Override
@@ -38,5 +42,4 @@ public class BasePresenter {
         }).start();
 
     }
-
 }
