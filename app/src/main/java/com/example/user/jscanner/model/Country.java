@@ -3,9 +3,6 @@ package com.example.user.jscanner.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
-
 
 @Entity
 public class Country {
@@ -16,6 +13,14 @@ public class Country {
     private String startWtih;
     private String country;
     private String countryCode;
+
+    public Country(){}
+
+    public Country(String startWith, String country, String countryCode){ //TESTING CONSTRUCTOR
+        this.startWtih = startWith;
+        this.country = country;
+        this.countryCode = countryCode;
+    }
 
     public String getStartWtih() {
         return startWtih;

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="6dp">
+    android:layout_margin="6dp">
     <ProgressBar
         android:id="@+id/det_pb"
         android:layout_width="match_parent"
@@ -14,8 +14,20 @@
         />
     <ImageView
         android:id="@+id/det_barcode_image"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        tools:src="@drawable/main_pic"
+        />
+    <TextView
+        android:id="@+id/det_barcode_code"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:text="9002490100070"
+        android:gravity="center"
+        android:textSize="20sp"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,12 +40,15 @@
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/flag_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="fitXY"
+            tools:src="@drawable/main_pic" />
         <TextView
             android:id="@+id/flag_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             tools:text="Sample text"/>
     </LinearLayout>
 </LinearLayout>
