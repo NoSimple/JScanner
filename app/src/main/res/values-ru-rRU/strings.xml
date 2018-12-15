@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JScanner</string>
+    <string name="jscanner">JScanner</string>
+    <string name="main_edittext_hint">Укажите штрихкод или нажмите \"сканировать\"</string>
+    <string name="scan_process">Сканировать/прочитать</string>
+    <string name="country">Страна</string>
+</resources>

@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="JScanner"
+        android:text="@string/jscanner"
         android:textStyle="bold"
         android:gravity="center"
         android:textSize="40sp"/>
@@ -22,14 +22,14 @@
         android:id="@+id/manual_barcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter barcode or press camera"
+        android:hint="@string/main_edittext_hint"
         android:layout_weight="0.5"
         />
     <Button
         android:id="@+id/scan_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scan/Process"
+        android:text="@string/scan_process"
         android:layout_weight="1"/>
 
 </LinearLayout>
