@@ -13,4 +13,7 @@
     <string name="scanner_barode_scanned">Штрих-код успешно отсканирован</string>
     <string name="title_about">Андроид Академия Хакатон 2018</string>
     <string name="full_text">Real thanks to Android Academy for this unforgetable expirience! Mentor are tough pros and nice persons and all =)</string>
+    <string name="item">Товар</string>
+    <string name="brand">Бренд</string>
+    <string name="external_databases">Во внешних базах</string>
 </resources>

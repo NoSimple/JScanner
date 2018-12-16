@@ -7,12 +7,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.user.jscanner.Adapters.CustomAdapter;
 import com.example.user.jscanner.R;
 import com.example.user.jscanner.presenters.DetailPresenter;
 
@@ -30,6 +33,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView barcodeCodeTextView;
     private ImageView barcodeImageView;
     private LinearLayout searchLayout;
+    private ProgressBar loadProgressBar;
+    private RecyclerView recyclerView;
+
+    private CustomAdapter adapter;
+
 
     private String code;
 
@@ -45,6 +53,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         barcodeImageView = findViewById(R.id.det_barcode_image);
         barcodeCodeTextView = findViewById(R.id.det_barcode_code);
         searchLayout = findViewById(R.id.search_layout);
+        loadProgressBar = findViewById(R.id.det_load_pb);
+        recyclerView = findViewById(R.id.det_rv);
 
         findViewById(R.id.ebay_search).setOnClickListener(this);
         findViewById(R.id.gm_search).setOnClickListener(this);
@@ -54,6 +64,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         presenter.onAttach(this);
 
         code = getIntent().getStringExtra(CODE_EXTRA_KEY);
+
+        adapter = new CustomAdapter(code);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
         presenter.process(code);
     }
 
@@ -84,6 +99,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void hideBarcodeImage() {barcodeImageView.setVisibility(View.GONE);}
 
     public void hideSearch() {searchLayout.setVisibility(View.GONE);}
+
+    public void hideLoadPB(){
+        loadProgressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void onClick(View v) {
