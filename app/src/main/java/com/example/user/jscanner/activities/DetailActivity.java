@@ -18,8 +18,10 @@ import com.example.user.jscanner.presenters.DetailPresenter;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String SOURCE_URL = "http://daracul.000webhostapp.com/countries.csv";
-    private static final String LOG_TAG = "Testlog" ;
+    public static final String EBAY_BARCODE_LINK = "https://www.ebay.com/sch/i.html?&_nkw=%s";
+    public static final String GOODSMATRIX_LINK = "http://www.goodsmatrix.ru/goods/%s.html";
+    public static final String BARCODE_LOOKUP_LINK = "https://www.barcodelookup.com/%s";
+    public static final String CODE_EXTRA_KEY = "CODE";
 
     private ProgressBar progressBar;
     private DetailPresenter presenter;
@@ -51,7 +53,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         presenter = new DetailPresenter();
         presenter.onAttach(this);
 
-        code = getIntent().getStringExtra("CODE");
+        code = getIntent().getStringExtra(CODE_EXTRA_KEY);
         presenter.process(code);
     }
 
@@ -88,13 +90,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         String url = null;
         switch (v.getId()){
             case R.id.ebay_search :
-                url = String.format("https://www.ebay.com/sch/i.html?&_nkw=%s", code);
+                url = String.format(EBAY_BARCODE_LINK, code);
                 break;
             case R.id.gm_search :
-                url = String.format("http://www.goodsmatrix.ru/goods/%s.html", code);
+                url = String.format(GOODSMATRIX_LINK, code);
                 break;
             case R.id.bl_search :
-                url = String.format("https://www.barcodelookup.com/%s", code);
+                url = String.format(BARCODE_LOOKUP_LINK, code);
                 break;
             default:
         }

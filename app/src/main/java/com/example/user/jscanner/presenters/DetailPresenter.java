@@ -20,16 +20,18 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.logging.Handler;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class DetailPresenter implements IBasePresenter {
 
+    private static final String COUNTRY_FLAGS_IO = "https://www.countryflags.io/%s/flat/64.png";
     private DetailActivity activity;
-    private Handler handler;
     private CountryRepository db;
-    final RequestOptions imageOption = new RequestOptions()
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    final private RequestOptions imageOption = new RequestOptions()
             .placeholder(R.drawable.flag_placeholder)
             .fallback(R.drawable.flag_placeholder)
             .centerCrop();
@@ -42,7 +44,7 @@ public class DetailPresenter implements IBasePresenter {
         this.activity = (DetailActivity) activity;
         this.imageLoader = Glide.with(activity).applyDefaultRequestOptions(imageOption);
 
-        db = new CountryRepository(activity);
+        db = new CountryRepository(activity.getApplicationContext());
     }
 
     @Override
@@ -51,6 +53,7 @@ public class DetailPresenter implements IBasePresenter {
         if (db != null) {
             db = null;
         }
+        compositeDisposable.clear();
         imageLoader = null;
     }
 
@@ -71,7 +74,7 @@ public class DetailPresenter implements IBasePresenter {
                         fillData(null, code);
                     }
                 });
-
+        compositeDisposable.add(disposable);
             }
 
     private void fillData(CountryItem country, String code) {
@@ -94,7 +97,7 @@ public class DetailPresenter implements IBasePresenter {
                 activity.setFlagImage(resources.getDrawable(resourceId, activity.getTheme()));
             } else {
                 imageLoader
-                        .load("https://www.countryflags.io/" + country.getCountrycode() + "/flat/64.png")
+                        .load(String.format(COUNTRY_FLAGS_IO,country.getCountrycode()))
                         .into(activity.getFlagImageView());
             }
             activity.setBarcodeImage(finalBitmap);

@@ -50,35 +50,28 @@ public class SplashScreenPresenter implements IBasePresenter {
 
     public void initDB() {
         checkDatabase();
-        Log.d(LOG_TAG,"Base exists? " + doesDatabaseExist());
+        Log.d(LOG_TAG, "Base exists? " + doesDatabaseExist());
     }
 
     private void checkDatabase() {
         Disposable disposable = db.getItems().subscribeOn(Schedulers.io())
                 .delay(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<CountryItem>>() {
                     @Override
                     public void accept(List<CountryItem> countryItems) throws Exception {
-                        if (countryItems.isEmpty()) {loadDataFromNetwork();} else {
-                            activity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    activity.startNextActivity();
-                                }
-                            });
-
+                        if (countryItems.isEmpty()) {
+                            loadDataFromNetwork();
+                        } else {
+                            activity.startNextActivity();
                         }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.d(LOG_TAG,"ERROR WITH CHECKING DB");
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                activity.showAlert();
-                            }
-                        });
+                        Log.d(LOG_TAG, "ERROR WITH CHECKING DB");
+
+                        activity.showAlert();
                     }
                 });
         compositeDisposable.add(disposable);
@@ -99,6 +92,7 @@ public class SplashScreenPresenter implements IBasePresenter {
 
                     }
                 })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<CountryItem>>() {
                     @Override
                     public void accept(List<CountryItem> countryItems) throws Exception {
@@ -108,23 +102,14 @@ public class SplashScreenPresenter implements IBasePresenter {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.d(LOG_TAG, throwable.getClass().getSimpleName());
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                activity.showAlert();
-                            }
-                        });
+                        activity.showAlert();
                     }
                 });
         compositeDisposable.add(disposable);
     }
 
-    private  boolean doesDatabaseExist() {
+    private boolean doesDatabaseExist() {
         File dbFile = activity.getDatabasePath(AppDatabase.DATABASE_NAME);
         return dbFile.exists();
     }
-
-
-
-
 }

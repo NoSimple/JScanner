@@ -16,19 +16,15 @@ import com.example.user.jscanner.R;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //    private static final String SHARED_PREF_INSTANCE = "INTRO_SHARED_PREF";
-//    private static final String BOOLEAN_PREF_KEY = "KEY_SHARED_PREF";
     private static final String LOG_TAG = "Testlog";
-    Button scanBtn;
-    EditText manualET;
+    private Button scanBtn;
+    private EditText manualET;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Log.d(LOG_TAG, "isFirst? " + isFirstTime());
-
 
 
         scanBtn = findViewById(R.id.scan_btn);
@@ -52,26 +48,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!(s.toString().matches("^\\d{13}"))){
+                if (!(s.toString().matches("^\\d{13}"))) {
                     manualET.setError("Невалидный код");
                 }
             }
         });
-
         scanBtn.setOnClickListener(this);
     }
-
 
 
     @Override
     public void onClick(View v) {
         String manualBarcode = manualET.getText().toString();
-        if(!(manualBarcode.isEmpty() || manualBarcode.matches("^\\d{13}"))){
+        if (!(manualBarcode.isEmpty() || manualBarcode.matches("^\\d{13}"))) {
             manualET.setError("Невалидный код");
             return;
         }
@@ -80,27 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, DetailActivity.class);
-            intent.putExtra("CODE", manualBarcode);
+            intent.putExtra(DetailActivity.CODE_EXTRA_KEY, manualBarcode);
             startActivity(intent);
         }
     }
-
-//    private boolean isFirstTime() {
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_INSTANCE, MODE_PRIVATE);
-//        return sharedPreferences.getBoolean(BOOLEAN_PREF_KEY, true);
-//    }
-//
-//    private void saveBooleanToSharedPref(Boolean firstTime) {
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_INSTANCE, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putBoolean(BOOLEAN_PREF_KEY, firstTime);
-//        editor.apply();
-//    }
-
-
-
-
-
 
     @Override
     protected void onStop() {
