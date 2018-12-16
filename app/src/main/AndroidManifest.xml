@@ -26,6 +26,9 @@
         <activity android:name=".activities.ScannerActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.AboutActivity"></activity>
+        <activity
+            android:name=".activities.MapActivity"
+            android:theme="@style/SplashTheme" />
     </application>
 
 </manifest>

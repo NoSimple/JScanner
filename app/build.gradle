@@ -18,6 +18,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "http://maven.google.com/"
+    }
+}
+
 ext.versionRetrofit = '2.4.0'
 ext.versionOkHttpLogingInterceptor = '3.6.0'
 def room_version = "1.1.1"
@@ -55,4 +61,7 @@ dependencies {
     //rv
     implementation 'com.android.support:recyclerview-v7:27.0.0'
     implementation 'com.android.support:cardview-v7:27.0.0'
+
+    //Yandex map
+    implementation 'com.yandex.android:mapkit:3.1.2'
 }
