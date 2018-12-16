@@ -18,6 +18,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "http://maven.google.com/"
+    }
+}
+
 ext.versionRetrofit = '2.4.0'
 ext.versionOkHttpLogingInterceptor = '3.6.0'
 def room_version = "1.1.1"
@@ -51,4 +57,7 @@ dependencies {
     //barcode_generation
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+
+    //Yandex map
+    implementation 'com.yandex.android:mapkit:3.1.2'
 }

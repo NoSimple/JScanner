@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".activities.MapActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +25,7 @@
         <activity android:name=".activities.DetailActivity" />
         <activity android:name=".activities.ScannerActivity" />
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.SplashScreenActivity" />
     </application>
 
 </manifest>
