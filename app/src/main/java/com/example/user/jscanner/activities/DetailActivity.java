@@ -48,25 +48,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         presenter = new DetailPresenter();
         presenter.onAttach(this);
 
-        /*
-        Disposable disposable = RestApi.getInstance().countriesEndpoint().countryObject(SOURCE_URL).
-                subscribeOn(Schedulers.io())
-                //.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new io.reactivex.functions.Consumer<List<Country>>() {
-                    @Override
-                    public void accept(List<Country> countries) throws Exception {
-                        for (Country country: countries){
-                            Log.d(LOG_TAG, country.getStartWtih()+" " +country.getCountry());
-                        }
-
-                    }
-                }, new io.reactivex.functions.Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(LOG_TAG, throwable.getClass().getSimpleName()+" ");
-                    }
-                });
-        */
         code = getIntent().getStringExtra("CODE");
         presenter.process(code);
     }

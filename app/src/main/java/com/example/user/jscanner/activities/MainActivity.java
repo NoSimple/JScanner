@@ -3,8 +3,6 @@ package com.example.user.jscanner.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,17 +14,12 @@ import com.example.user.jscanner.R;
 import com.example.user.jscanner.model.Country;
 import com.example.user.jscanner.model.CountryMapper;
 import com.example.user.jscanner.network.RestApi;
-import com.example.user.jscanner.room.AppDatabase;
 import com.example.user.jscanner.room.CountryItem;
 import com.example.user.jscanner.room.CountryRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.CompletableSource;
-import io.reactivex.Scheduler;
 import io.reactivex.SingleSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;

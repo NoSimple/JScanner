@@ -54,12 +54,13 @@ public class ScannerActivity extends AppCompatActivity {
         super.onStop();
 
         presenter.onDetach();
+        finish();
     }
 
     private void initBarcodeDetector() {
 
         barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.EAN_13)
+                .setBarcodeFormats(Barcode.EAN_13 | Barcode.EAN_8)
                 .build();
 
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
@@ -106,7 +107,7 @@ public class ScannerActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
                             intent.putExtra("CODE", barcode.valueAt(0).rawValue);
                             startActivity(intent);
