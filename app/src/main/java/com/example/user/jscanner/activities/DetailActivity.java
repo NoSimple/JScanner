@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView flagTextView;
     private TextView barcodeCodeTextView;
     private ImageView barcodeImageView;
+    private LinearLayout searchLayout;
 
     private String code;
 
@@ -40,6 +42,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         flagTextView = findViewById(R.id.flag_text);
         barcodeImageView = findViewById(R.id.det_barcode_image);
         barcodeCodeTextView = findViewById(R.id.det_barcode_code);
+        searchLayout = findViewById(R.id.search_layout);
 
         findViewById(R.id.ebay_search).setOnClickListener(this);
         findViewById(R.id.gm_search).setOnClickListener(this);
@@ -75,6 +78,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void setBarcodeCode(String code){barcodeCodeTextView.setText(code);}
 
     public ImageView getFlagImageView() {return flagImageView;}
+
+    public void hideBarcodeImage() {barcodeImageView.setVisibility(View.GONE);}
+
+    public void hideSearch() {searchLayout.setVisibility(View.GONE);}
 
     @Override
     public void onClick(View v) {

@@ -1,10 +1,10 @@
 package com.example.user.jscanner.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -44,6 +44,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return handled;
             }
         });
+        manualET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!(s.toString().matches("^\\d{13}"))){
+                    manualET.setError("Невалидный код");
+                }
+            }
+        });
 
         scanBtn.setOnClickListener(this);
     }
@@ -53,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         String manualBarcode = manualET.getText().toString();
+        if(!(manualBarcode.isEmpty() || manualBarcode.matches("^\\d{13}"))){
+            manualET.setError("Невалидный код");
+            return;
+        }
         if (manualBarcode.isEmpty()) {
             Intent intent = new Intent(this, ScannerActivity.class);
             startActivity(intent);
