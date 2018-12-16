@@ -6,4 +6,7 @@
     <string name="scan_process">Сканировать/прочитать</string>
     <string name="country">Страна</string>
     <string name="search_on">Найти на</string>
+    <string name="item">Товар</string>
+    <string name="brand">Бренд</string>
+    <string name="external_databases">Во внешних базах</string>
 </resources>

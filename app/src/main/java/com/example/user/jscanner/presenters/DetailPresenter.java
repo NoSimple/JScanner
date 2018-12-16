@@ -17,8 +17,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import java.util.logging.Handler;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -107,6 +105,22 @@ public class DetailPresenter implements IBasePresenter {
             activity.hideBarcodeImage();
             activity.hideSearch();
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            activity.hideLoadPB();
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         activity.hidePB();
 
     }
