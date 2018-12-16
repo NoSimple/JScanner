@@ -8,11 +8,14 @@ import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.map.MapObjectCollection;
 import com.yandex.mapkit.mapview.MapView;
+import com.yandex.runtime.image.ImageProvider;
 
 public class MapActivity extends AppCompatActivity {
 
     private MapView mapview;
+    private MapObjectCollection mapObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +27,14 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
         mapview = findViewById(R.id.mapView);
         mapview.getMap().move(
-                new CameraPosition(new Point(57.751588, 37.573856), 20.0f, 0.0f, 0.0f),
+                new CameraPosition(new Point(55.751574, 37.573856), 10.0f, 0.0f, 0.0f),
                 new Animation(Animation.Type.SMOOTH, 0),
                 null);
+
+        mapObject = mapview.getMap().getMapObjects().addCollection();
+        mapObject.addPlacemark(new Point(55.800698, 37.594215)).setIcon(ImageProvider.fromResource(this, R.drawable.ic_action_flag));
+        mapObject.addPlacemark(new Point(55.718890, 37.675840)).setIcon(ImageProvider.fromResource(this, R.drawable.ic_action_flag));
+        mapObject.addPlacemark(new Point(55.722870, 37.674925)).setIcon(ImageProvider.fromResource(this, R.drawable.ic_action_flag));
     }
 
     @Override

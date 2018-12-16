@@ -109,7 +109,7 @@ public class DetailPresenter implements IBasePresenter {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
