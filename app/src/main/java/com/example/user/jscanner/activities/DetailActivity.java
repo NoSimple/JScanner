@@ -56,6 +56,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         loadProgressBar = findViewById(R.id.det_load_pb);
         recyclerView = findViewById(R.id.det_rv);
 
+        findViewById(R.id.ya_maps).setOnClickListener(this);
         findViewById(R.id.ebay_search).setOnClickListener(this);
         findViewById(R.id.gm_search).setOnClickListener(this);
         findViewById(R.id.bl_search).setOnClickListener(this);
@@ -118,6 +119,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bl_search :
                 url = String.format(BARCODE_LOOKUP_LINK, code);
                 break;
+            case R.id.ya_maps:
+                Intent yaMapsIntent = new Intent(this, MapActivity.class);
+                startActivity(yaMapsIntent);
             default:
         }
         if (url != null){
