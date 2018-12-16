@@ -23,7 +23,6 @@ import com.example.user.jscanner.room.CountryRepository;
 import java.util.List;
 
 import io.reactivex.SingleSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
