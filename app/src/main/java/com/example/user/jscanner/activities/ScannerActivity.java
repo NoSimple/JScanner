@@ -35,6 +35,7 @@ public class ScannerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_scanner);
 
         surfaceView = findViewById(R.id.surfaceView);
@@ -55,7 +56,6 @@ public class ScannerActivity extends AppCompatActivity {
         super.onStop();
 
         presenter.onDetach();
-        finish();
     }
 
     @Override
@@ -85,7 +85,9 @@ public class ScannerActivity extends AppCompatActivity {
                 .build();
 
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(1920, 1080)
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
+                .setRequestedPreviewSize(1600, 1024)
+                .setRequestedFps(15.0f)
                 .setAutoFocusEnabled(true)
                 .build();
 
@@ -140,5 +142,6 @@ public class ScannerActivity extends AppCompatActivity {
         Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
         intent.putExtra("CODE", code);
         startActivity(intent);
+        finish();
     }
 }
