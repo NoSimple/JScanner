@@ -29,12 +29,15 @@
         android:hint="@string/main_edittext_hint"
         android:inputType="number"
         android:imeOptions="actionGo"/>
-    <Button
+    <Button style="@style/PrimaryFlatButton"
         android:layout_margin="4dp"
         android:id="@+id/scan_btn"
+        android:background="@drawable/button_shape"
+        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/scan_process"
+        android:textColor="@color/lightPrimaryColor"
         android:layout_weight="1"/>
 
 </LinearLayout>
