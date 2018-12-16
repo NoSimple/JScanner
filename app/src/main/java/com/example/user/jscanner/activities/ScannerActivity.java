@@ -73,6 +73,8 @@ public class ScannerActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    finish();
                 }
             }
         }
@@ -87,7 +89,6 @@ public class ScannerActivity extends AppCompatActivity {
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedPreviewSize(1600, 1024)
-                .setRequestedFps(15.0f)
                 .setAutoFocusEnabled(true)
                 .build();
 
