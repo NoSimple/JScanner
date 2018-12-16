@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
@@ -57,6 +58,26 @@ public class ScannerActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CAMERA_PERMISSION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new
+                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                        return;
+                    }
+                    try {
+                        cameraSource.start(surfaceView.getHolder());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
     private void initBarcodeDetector() {
 
         barcodeDetector = new BarcodeDetector.Builder(this)
@@ -71,14 +92,13 @@ public class ScannerActivity extends AppCompatActivity {
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+                if (ActivityCompat.checkSelfPermission(ScannerActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ScannerActivity.this, new
+                            String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                    return;
+                }
                 try {
-                    if (ActivityCompat.checkSelfPermission(ScannerActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        cameraSource.start(surfaceView.getHolder());
-                    } else {
-                        ActivityCompat.requestPermissions(ScannerActivity.this, new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                    }
-
+                    cameraSource.start(surfaceView.getHolder());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -107,15 +127,18 @@ public class ScannerActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //Toast.makeText(getApplicationContext(), "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
-                            intent.putExtra("CODE", barcode.valueAt(0).rawValue);
-                            startActivity(intent);
-                            finish();
+                            Toast.makeText(ScannerActivity.this, "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
+                            startNextActivity(barcode.valueAt(0).rawValue);
                         }
                     });
                 }
             }
         });
+    }
+
+    private void startNextActivity(String code) {
+        Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
+        intent.putExtra("CODE", code);
+        startActivity(intent);
     }
 }
