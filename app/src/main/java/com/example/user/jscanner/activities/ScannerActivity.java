@@ -129,7 +129,7 @@ public class ScannerActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ScannerActivity.this, "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ScannerActivity.this, R.string.scanner_barode_scanned, Toast.LENGTH_SHORT).show();
                             startNextActivity(barcode.valueAt(0).rawValue);
                         }
                     });
@@ -140,7 +140,7 @@ public class ScannerActivity extends AppCompatActivity {
 
     private void startNextActivity(String code) {
         Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
-        intent.putExtra("CODE", code);
+        intent.putExtra(DetailActivity.CODE_EXTRA_KEY, code);
         startActivity(intent);
         finish();
     }

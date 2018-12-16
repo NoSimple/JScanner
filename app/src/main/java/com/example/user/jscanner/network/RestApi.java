@@ -33,8 +33,6 @@ public class RestApi {
 
     private RestApi() {
         final Retrofit retrofit = buildRetrofitClient();
-
-        //init endpoints here. It's can be more then one endpoint
         barcodesEndpoint = retrofit.create(CountryEndpoint.class);
     }
 

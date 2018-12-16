@@ -5,4 +5,9 @@
     <string name="country">Country</string>
     <string name="main_edittext_hint">Enter barcode or press \"scan\"</string>
     <string name="search_on">Search on:</string>
+    <string name="Dialog_load_error">Load error</string>
+    <string name="dialog_retry">Retry?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="scanner_barode_scanned">Штрих-код успешно отсканирован</string>
 </resources>

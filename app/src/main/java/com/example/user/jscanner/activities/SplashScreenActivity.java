@@ -39,15 +39,15 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     public void showAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Load error");
-        builder.setMessage("Retry?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.Dialog_load_error);
+        builder.setMessage(R.string.dialog_retry);
+        builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 presenter.initDB();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();
