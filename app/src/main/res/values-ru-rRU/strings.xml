@@ -5,4 +5,5 @@
     <string name="main_edittext_hint">Укажите штрихкод или нажмите \"сканировать\"</string>
     <string name="scan_process">Сканировать/прочитать</string>
     <string name="country">Страна</string>
+    <string name="search_on">Найти на</string>
 </resources>
