@@ -4,4 +4,5 @@
     <string name="scan_process">Scan/Process</string>
     <string name="country">Country</string>
     <string name="main_edittext_hint">Enter barcode or press \"scan\"</string>
+    <string name="search_on">Search on:</string>
 </resources>
