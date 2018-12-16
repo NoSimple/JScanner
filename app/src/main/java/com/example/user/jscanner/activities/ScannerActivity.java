@@ -107,11 +107,15 @@ public class ScannerActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //Toast.makeText(getApplicationContext(), "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Штрих-код успешно отсканирован", Toast.LENGTH_SHORT).show();
+                            try {
+                                Thread.sleep(2000L);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
                             intent.putExtra("CODE", barcode.valueAt(0).rawValue);
                             startActivity(intent);
-                            finish();
                         }
                     });
                 }
