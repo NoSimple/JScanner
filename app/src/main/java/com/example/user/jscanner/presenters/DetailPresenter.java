@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.user.jscanner.R;
 import com.example.user.jscanner.activities.DetailActivity;
 import com.example.user.jscanner.model.Country;
 import com.example.user.jscanner.room.AppDatabase;
@@ -31,11 +34,19 @@ public class DetailPresenter implements IBasePresenter {
     private DetailActivity activity;
     private Handler handler;
     private CountryRepository db;
+    final RequestOptions imageOption = new RequestOptions()
+            .placeholder(R.drawable.flag_placeholder)
+            .fallback(R.drawable.flag_placeholder)
+            .centerCrop();
+    private RequestManager imageLoader;
+
 
 
     @Override
     public void onAttach(AppCompatActivity activity) {
         this.activity = (DetailActivity) activity;
+        this.imageLoader = Glide.with(activity).applyDefaultRequestOptions(imageOption);
+
         db = new CountryRepository(activity);
     }
 
@@ -45,6 +56,7 @@ public class DetailPresenter implements IBasePresenter {
         if (db != null) {
             db = null;
         }
+        imageLoader = null;
     }
 
     public void process(final String code) {
@@ -85,7 +97,7 @@ public class DetailPresenter implements IBasePresenter {
             if (resourceId != 0) {
                 activity.setFlagImage(resources.getDrawable(resourceId, activity.getTheme()));
             } else {
-                Glide.with(activity)
+                imageLoader
                         .load("https://www.countryflags.io/" + country.getCountrycode() + "/flat/64.png")
                         .into(activity.getFlagImageView());
             }

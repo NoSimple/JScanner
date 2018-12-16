@@ -51,8 +51,6 @@ public class SplashScreenPresenter implements IBasePresenter {
     public void initDB() {
         checkDatabase();
         Log.d(LOG_TAG,"Base exists? " + doesDatabaseExist());
-
-//        activity.startNextActivity();
     }
 
     private void checkDatabase() {
