@@ -9,5 +9,9 @@
     <string name="dialog_retry">Retry?</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
-    <string name="scanner_barode_scanned">Штрих-код успешно отсканирован</string>
+    <string name="scanner_barode_scanned">Successfully scanned</string>
+    <string name="title_about">Android Academy Hackathon 2018</string>
+    <string name="full_text">\nReal thanks to Android Academy for this unforgettable expirience! Mentor are tough pros and nice persons and all =)
+    We had a chance to learn a lot of new things and got acquired with lots of students - we are all so different people but got here together because we love Android! \n\n Also Moxy is the best, but ofcource we won`t use it.</string>
+
 </resources>

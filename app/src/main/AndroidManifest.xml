@@ -25,6 +25,7 @@
         <activity android:name=".activities.DetailActivity" />
         <activity android:name=".activities.ScannerActivity" />
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.AboutActivity"></activity>
     </application>
 
 </manifest>
