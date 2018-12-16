@@ -13,7 +13,7 @@ import com.example.user.jscanner.model.Country;
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase singleton;
 
-    private static final String DATABASE_NAME = "countries.db";
+    public static final String DATABASE_NAME = "countries.db";
 
     public abstract CountryDAO countryDAO();
 
