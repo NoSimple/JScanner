@@ -7,20 +7,15 @@ import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.example.user.jscanner.activities.DetailActivity;
-import com.example.user.jscanner.model.Country;
-import com.example.user.jscanner.room.AppDatabase;
 import com.example.user.jscanner.room.CountryItem;
 import com.example.user.jscanner.room.CountryRepository;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Handler;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -60,7 +55,8 @@ public class DetailPresenter implements IBasePresenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-//                        Log.d("myLogs", throwable.getClass().getSimpleName());
+                        Log.d("myLogs", throwable.getClass().getSimpleName());
+                        fillData(null, code);
                     }
                 });
 
@@ -73,11 +69,11 @@ public class DetailPresenter implements IBasePresenter {
             BitMatrix bitMatrix = multiFormatWriter.encode(code, BarcodeFormat.EAN_13, 1024, 512);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             bitmap = barcodeEncoder.createBitmap(bitMatrix);
-        } catch (WriterException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         final Bitmap finalBitmap = bitmap;
-        if (country != null) {
+        if (country != null && bitmap != null) {
             activity.setFlagText(country.getCountry());
             Resources resources = activity.getResources();
             final int resourceId = resources.getIdentifier(country.getCountrycode() + ".png", "drawable",
@@ -92,7 +88,9 @@ public class DetailPresenter implements IBasePresenter {
             activity.setBarcodeImage(finalBitmap);
             activity.setBarcodeCode(code);
         } else {
-            activity.setFlagText("Not found!");
+            activity.setFlagText("Error!");
+            activity.hideBarcodeImage();
+            activity.hideSearch();
         }
         activity.hidePB();
 
