@@ -42,6 +42,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 holder.brand.setText("Red Bull");
                 holder.name.setText(position == 0 ? "Energy drink 250ml" : "Drink vol. 0.25");
                 break;
+            case "7622210309358":
+                holder.brand.setText("Oreo");
+                holder.name.setText(position == 0 ? "Cookies" : "Chocolate cookies with milk");
+                break;
+            case "4600949140018":
+                holder.brand.setText("Чудо");
+                holder.name.setText(position == 0 ? "Молочный напиток 0.2л" : "Шоколадный коктейль");
+                break;
             default :
                 holder.brand.setText("");
                 holder.name.setText("");
