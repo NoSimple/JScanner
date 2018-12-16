@@ -110,6 +110,7 @@ public class ScannerActivity extends AppCompatActivity {
                             Intent intent = new Intent(ScannerActivity.this, DetailActivity.class);
                             intent.putExtra("CODE", barcode.valueAt(0).rawValue);
                             startActivity(intent);
+                            finish();
                         }
                     });
                 }
